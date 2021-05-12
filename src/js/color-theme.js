@@ -6,15 +6,24 @@ const switchTheme = document.querySelector('.theme-switch__toggle');
 const bodyColor = document.querySelector('body');
 
 switchTheme.addEventListener('click', colorThemeAdd);
+
+function addedClassList(added, remove) {
+  bodyColor.classList.remove(remove);
+  bodyColor.classList.add(added);
+}
+function includeDark() {
+  addedClassList(Theme.DARK, Theme.LIGHT);
+}
+function includeLight() {
+  addedClassList(Theme.LIGHT, Theme.DARK);
+}
 function colorThemeAdd(evt) {
   const truthInputColor = evt.target.checked;
   if (truthInputColor) {
-    bodyColor.classList.remove(Theme.LIGHT);
-    bodyColor.classList.add(Theme.DARK);
+    includeDark();
     localStorage.setItem('color', Theme.DARK);
   } else {
-    bodyColor.classList.remove(Theme.DARK);
-    bodyColor.classList.add(Theme.LIGHT);
+    includeLight();
     localStorage.setItem('color', Theme.LIGHT);
   }
 }
